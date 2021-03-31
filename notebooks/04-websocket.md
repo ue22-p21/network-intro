@@ -334,7 +334,7 @@ server.stop()
 
 +++ {"slideshow": {"slide_type": "slide"}}
 
-## Une messagerie instantannée
+## Une messagerie instantanée
 
 +++ {"slideshow": {"slide_type": "slide"}}
 

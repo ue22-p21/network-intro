@@ -287,7 +287,7 @@ Les principales rêgles syntaxiques de Jinja2 sont les suivantes :
 
 +++ {"slideshow": {"slide_type": "slide"}}
 
-Une fois notre page HTML templaté par ce que l'on veut, il faut expliquer à notre application Flask que l'on doit retourner une page templaté. Pour cela on utilise la fonction `render_template`. Si on reprend l'exemple de la demo3 on a :
+Une fois notre page HTML templatée par ce que l'on veut, il faut expliquer à notre application Flask que l'on doit retourner une page templatée. Pour cela on utilise la fonction `render_template`. Si on reprend l'exemple de la demo3 on a :
 
 ```{code-cell} ipython3
 ---
