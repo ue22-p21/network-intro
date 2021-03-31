@@ -1,14 +1,9 @@
 ipykernel
 ipywidgets
-numpy
-
-# jupyter tools
-#
+jupyter
+jupytext
 rise
-jupyter-contrib-nbextensions
-jupytext[myst]
+numpy
+requests
+tornado
 
-# output html static 
-ipypublish[sphinx]
-sphinx-rtd-theme
-jupyter_client
