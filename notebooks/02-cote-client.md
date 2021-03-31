@@ -521,10 +521,15 @@ def timeout(time):
 slideshow:
   slide_type: subslide
 ---
-with timeout(10):
-    client.send(b"Hello Google")
-    retour = client.recv(4096)
-    print(f"Reponse du server : {retour}")
+
+import sys 
+if not sys.platform.startswith("win"):
+  with timeout(10):
+      client.send(b"Hello Google")
+      retour = client.recv(4096)
+      print(f"Reponse du server : {retour}")
+else:
+  print("Invalid cell for windows")
 ```
 
 +++ {"slideshow": {"slide_type": "subslide"}}
