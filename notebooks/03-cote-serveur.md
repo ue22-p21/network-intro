@@ -528,7 +528,7 @@ class FileHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
 slideshow:
   slide_type: subslide
 ---
-FileHTTPRequestHandler.filename = "00_Introduction.ipynb"
+FileHTTPRequestHandler.filename = "00-introduction.md"
 
 server_port = 3051
 
