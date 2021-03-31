@@ -110,8 +110,8 @@ t.start()
 conn, addr = s.accept()
 print(f"Connexion du client {addr}")
 msg = conn.recv(1024).decode()
-print(f"Le serveur a recu {msg}")
-conn.send(f"Serveur a recu {msg}".encode())
+print(f"Le serveur a reçu {msg}")
+conn.send(f"Serveur a reçu {msg}".encode())
 conn.close()
 ```
 
@@ -137,8 +137,8 @@ def tcp_server( ip_server, port_server):
         print(f"Connexion du client {addr}")
         with conn:
             msg = conn.recv(1024).decode()
-            print(f"Le serveur a recu {msg}")
-            conn.send(f"Serveur a recu {msg}".encode())
+            print(f"Le serveur a reçu {msg}")
+            conn.send(f"Serveur a reçu {msg}".encode())
 ```
 
 ```{code-cell} ipython3
@@ -187,8 +187,8 @@ slideshow:
 class HelloTCPHandler( socketserver.BaseRequestHandler ):
     def handle(self):
         msg = self.request.recv(1024).decode()
-        print(f"Le serveur a recu {msg}")
-        self.request.send( f"Serveur a recu {msg}".encode() )
+        print(f"Le serveur a reçu {msg}")
+        self.request.send( f"Serveur a reçu {msg}".encode() )
 ```
 
 +++ {"slideshow": {"slide_type": "subslide"}}

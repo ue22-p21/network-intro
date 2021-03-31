@@ -128,7 +128,7 @@ while a != b"":
     a = s.recv(BUFF_SIZE)
     msg += a
     
-print(f"Le client a recu du server :\n {msg.decode()}")
+print(f"Le client a reçu du server :\n {msg.decode()}")
 ```
 
 +++ {"slideshow": {"slide_type": "fragment"}}
@@ -278,10 +278,10 @@ import pickle
 receive_c = pickle.loads( serialized_c )
 
 if hasattr(receive_c, "run"):
-    print("Le truc que j'ai recu a une méthode run donc je l'exécute")
+    print("Le truc que j'ai reçu a une méthode run donc je l'exécute")
     receive_c.run()
 else:
-    print("Pas de méthode run, je fais autre chose comme envoyer un message au client pour dire que j'ai pas recu ce qu'il faut ")
+    print("Pas de méthode run, je fais autre chose comme envoyer un message au client pour dire que j'ai pas reçu ce qu'il faut ")
     
 ```
 
