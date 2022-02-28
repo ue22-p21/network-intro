@@ -1,5 +1,5 @@
 ---
-celltoolbar: Slideshow
+celltoolbar: Diaporama
 jupytext:
   cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
   notebook_metadata_filter: all,-language_info,-toc,-jupytext.text_representation.jupytext_version,-jupytext.text_representation.format_version
@@ -634,11 +634,11 @@ out.headers
 
 On peut alors observer un certain nombre de choses. La première c'est que comme dans notre exemple avec le client TCP bas niveau la page n'est pas complètement chargée car il manque les feuilles de styles, les images, ... Et c'est normal, car nous ne les avons pas demandées, en effet quand vous consultez un site web via votre navigateur préféré c'est ce dernier qui s'occupe de parser le fichier html reçu pour regarder s'il n'a pas besoin d'autres fichiers (css, js, ...) et si c'est le cas c'est le navigateur qui fait la requête pour chaque fichier nécessaire. Donc quand vous chargez une page web votre navigateur ne fait pas une seule requête mais il en fait plusieurs dizaines généralement.
 
-+++
++++ {"slideshow": {"slide_type": "subslide"}}
 
 #### Les codes de retour
 
-+++
++++ {"slideshow": {"slide_type": "fragment"}}
 
 Lorsque l'on fait une requête à un serveur via http/https ce dernier nous renvoie en premier lieu un code de retour. Ces codes sont normalisés. Voici un extrait non complet des codes possibles : 
 
@@ -649,15 +649,15 @@ Lorsque l'on fait une requête à un serveur via http/https ce dernier nous renv
 - 404 : ce que tu me demande n'existe pas ! 
 - 5XX : la c'est un problème de serveur
 
-+++
++++ {"slideshow": {"slide_type": "fragment"}}
 
 Et donc la première chose à faire lorsque vous faites une requête à un serveur c'est de vérifier que le code de retour est bien 200 car sinon pas la peine de continuer !
 
-+++
++++ {"slideshow": {"slide_type": "subslide"}}
 
 #### Les requêtes !
 
-+++ {"slideshow": {"slide_type": "subslide"}}
++++ {"slideshow": {"slide_type": "fragment"}}
 
 Vous avez peut être remarqué que précédemment nous avons utilisé `requets.get` mais c'est quoi ce `get`. Et bien en fait cela signifie que l'on envoie au serveur une requête de type `GET`. Dans le monde HTTP(S) il existe différents types de requêtes. 
 

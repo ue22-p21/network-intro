@@ -1,5 +1,5 @@
 ---
-celltoolbar: Slideshow
+celltoolbar: Diaporama
 jupytext:
   cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
   notebook_metadata_filter: all,-language_info,-toc,-jupytext.text_representation.jupytext_version,-jupytext.text_representation.format_version
@@ -7,7 +7,7 @@ jupytext:
     extension: .md
     format_name: myst
 kernelspec:
-  display_name: Python 3
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
 rise:
@@ -50,7 +50,7 @@ Ces 7 couches sont les suivantes :
 
 1. La couche « physique » est chargée de la transmission effective des signaux entre les interlocuteurs. Son service est limité à l'émission et la réception d'un bit ou d'un train de bit continu (notamment pour les supports synchrones (concentrateur)).
 1. La couche « liaison de données » gère les communications entre 2 machines directement connectées entre elles, ou connectées à un équipement qui émule une connexion directe (commutateur).
-1. La couche « réseau » gère les communications de proche en proche, généralement entre machines : routage et adressage des paquets (cf. note ci-dessous).
+1. La couche « réseau » gère les communications de proche en proche, généralement entre machines : routage et adressage des paquets.
 1. La couche « transport » gère les communications de bout en bout entre processus (programmes en cours d'exécution).
 1. La couche « session » gère la synchronisation des échanges et les « transactions », permet l'ouverture et la fermeture de session.
 1. La couche « présentation » est chargée du codage des données applicatives, précisément de la conversion entre données manipulées au niveau applicatif et chaînes d'octets effectivement transmises.
@@ -82,6 +82,11 @@ Même principe ou presque en fait ... En effet prenons par exemple Internet,  si
 Considérons un exemple très simple, vous sur votre ordinateur portable, facile à imaginer je sais. Nous allons maintenant analyser deux situations : 
 
 *Situation 1 :* Depuis votre ordinateur connecté en wifi à votre box vous voulez accéder aux films (téléchargés légalement évidemment) stockés sur votre NAS (Network Attached Storage) relié lui en filaire à votre box. Dans ce cas pas d'interconnexion puisque depuis une machine de votre réseau local (le réseau de votre box) vous cherchez à atteindre votre NAS qui est dans le même réseau. 
+
+<img src="../media/local.png" style="width: 40%">
+
++++ {"slideshow": {"slide_type": "subslide"}}
+
 
 *Situation 2 :* Depuis votre ordinateur connecté en wifi à votre box vous voulez accéder à un site web quelconque. Dans ce cas le site web que vous recherchez n'est pas dans votre réseau local, votre box s'en rend compte et elle transmet alors votre requête à une passerelle (une machine ayant des interfaces dans plusieurs réseaux distincts) en lui demandant si la destination que vous souhaitez ne serait pas dans son autre réseau. Si c'est le cas c'est gagné, sinon la passerelle va elle même interroger une autre passerelle, ...
 
@@ -119,6 +124,9 @@ La connexion d'un client à un serveur TCP se décompose en trois étapes (le *t
 * Serveur : Oui je t'entends et toi ?
 * Client : Oui c'est bon je t'entends
 
+<img src="../media/handshake.png" style="width: 20%">
+
++++ {"slideshow": {"slide_type": "subslide"}}
 
 Une fois cette phase de connexion faite nous pouvons envoyer un message au serveur qui nous répondra en retour. Nous verrons dans le notebook suivant comment concrètement on peut envoyer un message au serveur et recevoir sa réponse. 
 
@@ -128,6 +136,8 @@ Enfin pour finir il faut fermer la connexion cette étape de clôture se réalis
 * Serveur : Ok c'est noté
 * Serveur : moi aussi je n'ai plus rien à te dire
 * Client : Ok à la prochaine
+
+<img src="../media/tcpClose.png" style="width: 20%">
 
 +++ {"slideshow": {"slide_type": "subslide"}}
 

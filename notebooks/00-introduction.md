@@ -1,5 +1,5 @@
 ---
-celltoolbar: Slideshow
+celltoolbar: Diaporama
 jupytext:
   cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
   notebook_metadata_filter: all,-language_info,-toc,-jupytext.text_representation.jupytext_version,-jupytext.text_representation.format_version
@@ -7,7 +7,7 @@ jupytext:
     extension: .md
     format_name: myst
 kernelspec:
-  display_name: Python 3
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
 rise:
@@ -16,10 +16,10 @@ rise:
 
 +++ {"slideshow": {"slide_type": "slide"}}
 
-# Programme Coopérants
+# Introduction à la programmation réseaux 
 
 
-**Basile Marchand --- Mines ParisTech**
+**Basile Marchand --- Centre des Matériaux - Mines Paris - Université PSL**
 
 +++ {"slideshow": {"slide_type": "slide"}}
 
@@ -27,11 +27,9 @@ rise:
 
 +++ {"slideshow": {"slide_type": "fragment"}}
 
-## Le parallélisme une forme de coopération mais pas la seule
+## La coopération le concept clé de l'informatique 
 
-Dans le cours précédent nous avons vu comment il est possible d'exploiter les architectures de calcul modernes, processeurs multi-coeurs, cluster de calcul afin de réaliser des programmes parallèles. Nous avons donc vu une forme de coopération entre programmes. Cependant ce modèle de coopération est relativement particulier et assez spécifique en terme d'application.  
-
-Nous allons voir aujourd'hui un autre mode de coopérations entre programme, celui que vous utilisez en réalité tous les jours sans peut-être le savoir!
+TODO 
 
 +++ {"slideshow": {"slide_type": "subslide"}}
 
@@ -39,11 +37,11 @@ Nous allons voir aujourd'hui un autre mode de coopérations entre programme, cel
 
 +++ {"slideshow": {"slide_type": "subslide"}}
 
-En effet le modèle coopérant le plus courant dans le monde de l'informatique met en jeu le concept de réseau. En effet dans le monde actuel tout est interconnecté via des réseaux. Et grâce à ce réseau il est possible de connecter tout un tas d'applications entre elles.
+Le modèle coopérant le plus courant dans le monde de l'informatique met en jeu le concept de réseau. En effet dans le monde actuel tout est interconnecté via des réseaux. Et grâce à ce réseau il est possible de connecter tout un tas d'applications entre elles.
 
 +++ {"slideshow": {"slide_type": "fragment"}}
 
-Cela introduit alors tout un tas de questions : comment communiquer entre deux applications sur un réseau ? Comment envoyer un message d'une application vers une autre via le réseau ? Sous quel format envoyer ce message ? Comment on fait une application Python capable d'écouter sur le réseau ?
+Cela introduit alors tout un tas de questions : comment communiquer entre deux applications sur un réseau ? Comment envoyer un message d'une application vers une autre via le réseau ? Sous quel format envoyer ce message ? Comment fait-on une application Python capable d'écouter sur le réseau ?
 
 +++ {"slideshow": {"slide_type": "fragment"}}
 
@@ -57,13 +55,19 @@ Il faut bien voir qu'il existe plusieurs approches possibles pour faire des prog
 
 Le premier cas de figure, le plus répandu c'est celui où une machine A sur le réseau ne fait rien, elle ne fait qu'attendre qu'une machine B lui envoie un message pour faire quelque chose. C'est ce que l'on appelle une architecture client-serveur. La machine passive est le serveur qui ne fait rien de sa propre initiative, tandis que le machine B est le client. Dans ce modèle, c'est le client qui envoie un message au serveur en attente, ce dernier traite alors le message et envoie une réponse au client. Il s'agit du modèle le plus courant, une grande partie d'Internet repose dessus.
 
+<img src="../media/ClientServer.png" style="width: 50%;">
+
 +++ {"slideshow": {"slide_type": "subslide"}}
 
 À partir de cette architecture client-serveur on peut dériver les *architectures trois-tiers* qui vont nous permettre de spécialiser les serveurs dans une tâche précise. L'idée, que l'on peut deviner vu le nom, c'est d'ajouter une troisième couche dans l'architecture. Lorsque le client A envoie un message au serveur B ce dernier traite le message et suivant la demande du client il le transfère à un serveur C qui sera chargé de traiter l'action.
 
+<img src="../media/ThreeTiers.png" style="width: 50%;">
+
 +++ {"slideshow": {"slide_type": "subslide"}}
 
 Et enfin le dernier type d'architecture envisageable, et dont vous avez peut-être déjà entendu parler, c'est l'architecture pair à pair (ou peer-to-peer) très célèbre à une époque où Netflix n'existait pas, oui oui je vous assure Netflix n'a pas toujours existé... Le principe de l'architecture peer-to-peer est que les machines A et B jouent toutes les deux à la fois le rôle du serveur et le rôle du client. L'intérêt principal de cette architecture est qu'elle permet de s'affranchir d'un serveur centralisé. En effet tous les ordinateurs du réseau étant des serveurs il n'y a pas besoin de tout centraliser sur une seule et unique machine.
+
+<img src="../media/PeerToPeer.png" style="width: 50%;">
 
 +++ {"slideshow": {"slide_type": "fragment"}}
 
@@ -79,7 +83,7 @@ Dans la suite de ce cours nous ne nous focaliserons que sur l'architecture clien
 
 +++ {"slideshow": {"slide_type": "subslide"}}
 
-La dessus vous vous dites certainement, ok mais le réseau c'est le web non ? Et bien non le réseau ce n'est pas le web, ni internet. Des réseaux il y en a partout. Alors oui c'est vrai internet c'est le réseau que l'on voit le plus mais ce n'est pas le seul. De plus internet, nous en reparlerons plus tard, est plus un réseau de réseaux. 
+La dessus vous vous dites certainement, ok mais le réseau c'est le web non ? Et bien non le réseau ce n'est pas le web, ni internet. Des réseaux il y en a partout. Alors oui c'est vrai internet c'est le réseau que l'on voit le plus mais ce n'est pas le seul. De plus internet est plus un réseau de réseaux. 
 
 Donc ce cours ne nous permettra pas de programmer du réseau sur internet ? J'ai pas dis ça donc restez encore un peu. Je dis juste que le Web n'a rien de mystique il est bâti sur des concepts qui existaient avant. Et donc rassurez-vous tout ce que nous allons voir dans la suite de ce cours s'appliquera aussi bien à du Web qu'à un réseau local coupé d'internet. 
 
