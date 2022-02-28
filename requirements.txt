@@ -6,4 +6,6 @@ rise
 numpy
 requests
 tornado
-
+flask
+flask_wtf
+flask_socketio

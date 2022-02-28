@@ -7,7 +7,7 @@ jupytext:
     extension: .md
     format_name: myst
 kernelspec:
-  display_name: Python 3
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
 rise:
@@ -521,7 +521,6 @@ def timeout(time):
 slideshow:
   slide_type: subslide
 ---
-
 import sys 
 if not sys.platform.startswith("win"):
   with timeout(10):
@@ -559,7 +558,7 @@ slideshow:
 ---
 from IPython.display import HTML
 
-HTML(response.decode("utf-8", "replace"))
+print(response.decode("utf-8", "replace"))
 ```
 
 +++ {"slideshow": {"slide_type": "subslide"}}
@@ -635,19 +634,43 @@ out.headers
 
 On peut alors observer un certain nombre de choses. La première c'est que comme dans notre exemple avec le client TCP bas niveau la page n'est pas complètement chargée car il manque les feuilles de styles, les images, ... Et c'est normal, car nous ne les avons pas demandées, en effet quand vous consultez un site web via votre navigateur préféré c'est ce dernier qui s'occupe de parser le fichier html reçu pour regarder s'il n'a pas besoin d'autres fichiers (css, js, ...) et si c'est le cas c'est le navigateur qui fait la requête pour chaque fichier nécessaire. Donc quand vous chargez une page web votre navigateur ne fait pas une seule requête mais il en fait plusieurs dizaines généralement.
 
++++
+
+#### Les codes de retour
+
++++
+
+Lorsque l'on fait une requête à un serveur via http/https ce dernier nous renvoie en premier lieu un code de retour. Ces codes sont normalisés. Voici un extrait non complet des codes possibles : 
+
+- 200 : ok tout s'est bien passé
+- 301/302 : redirection de la page 
+- 401 : il faut s'authentifier 
+- 403 : minute papillon tu n'as pas le droit d'accéder à ça ! 
+- 404 : ce que tu me demande n'existe pas ! 
+- 5XX : la c'est un problème de serveur
+
++++
+
+Et donc la première chose à faire lorsque vous faites une requête à un serveur c'est de vérifier que le code de retour est bien 200 car sinon pas la peine de continuer !
+
++++
+
+#### Les requêtes !
+
 +++ {"slideshow": {"slide_type": "subslide"}}
 
-Ensuite vous avez peut être remarqué que dans les deux cas nous avons utilisé la notion de 'GET'. Cela traduit le fait que notre requête est de type GET. C'est à dire une requête pour obtenir une ressource du serveur. Et donc si cette requête est de type GET cela signifie qu'il y a des requête de type pas GET et vous avez raison. 
+Vous avez peut être remarqué que précédemment nous avons utilisé `requets.get` mais c'est quoi ce `get`. Et bien en fait cela signifie que l'on envoie au serveur une requête de type `GET`. Dans le monde HTTP(S) il existe différents types de requêtes. 
 
-Il existe un certain nombre de types de requêtes HTTP, les principales sont les suivantes : 
+- `GET` : requêtes pour obtenir du serveur une ressource (fichier html/css/js, image, video, données, ...)
+- `POST` : requêtes pour envoyer des données au serveur en vu d'un traitement (ajout d'un utilisateur dans une base de donnée, ...)
+-  `PATCH` : requêtes pour modifier partiellement une ressource du serveur (mettre à jour l'addresse mail d'un utilisateur dans la base de donnée)
+- `DELETE` : requêtes pour supprimer une ressource du serveur (supprimer un commentaire sur un article, ... ) 
 
-* GET : méthode pour obtenir une ressource, page web, fichier de style, image, ... 
-* POST : méthode pour envoyer des données à une ressource en vue de leur traitement. Typiquement lorsque vous remplissez un formulaire sur un site web les données sont envoyées au serveur via un POST. 
-* DELETE : méthode pour supprimer une ressource
+Il s'agit là des principaux types de requêtes mais il en existe d'autre, pour la liste complète vous pouvez faire un tour [ici](https://fr.wikipedia.org/wiki/Hypertext_Transfer_Protocol).
 
 +++ {"slideshow": {"slide_type": "subslide"}}
 
-Commencons par tester ces trois types de requêtes. Pour cela le site [http://httpbin.org](http://httpbin.org) met à disposition un serveur de test relativement utile.
+Regardons un peu comment cela fonctionne en utilisant le module `requests`. Pour cela nous allons utiliser le site [http://httpbin.org](http://httpbin.org) qui met à disposition un serveur de test relativement utile.
 
 ```{code-cell} ipython3
 ---
@@ -673,7 +696,7 @@ slideshow:
   slide_type: fragment
 ---
 post_out = requests.post("http://httpbin.org/post", data={"name": "Basile Marchand", "mail": "basile.marchand@mines-paristech.fr"})
-print(get_out.content.decode())
+print(post_out.content.decode())
 ```
 
 ```{code-cell} ipython3
@@ -784,13 +807,25 @@ Donc pour conclure sur les API il s'agit d'un moyen très simple pour offrir une
 
 +++ {"slideshow": {"slide_type": "subslide"}}
 
-Maintenant que vous maîtrisez parfaitement le côté ~lumineux de la force~ client je vous propose un exercice. Vous allez devoir faire un programme Python qui va aller chercher de la donnée sur le Web. Pour cela je vous laisse libre sur le type de données que vous souhaitez traiter (à tout hasard on peut utiliser les chiffres du Covid19). Pour faciliter vos recherches de données, je vous propose de faire un tour sur le site [https://public.opendatasoft.com](https://public.opendatasoft.com) qui met à disposition un ensemble très vaste de données et propose pour chaque jeux de données des API web permettant de faire les requêtes HTTP.
+Maintenant que vous maîtrisez parfaitement le côté ~lumineux de la force~ client je vous propose un exercice. 
+
+Je vous ai mis en place un serveur minimaliste offrant une API permettant : 
+1. Lister l'ensemble des utilisateurs de la base de donnée 
+2. Mettre à jour le status d'un utilisateur 
+3. Envoyer un message à un utilisateur 
+4. Récupérer les messages qui m'ont été envoyés.
 
 +++ {"slideshow": {"slide_type": "subslide"}}
 
-Donc l'idée est que vous vous choisissiez une thématique, faites vous plaisir. Ça peut être les chiffres sur le Covid19 ou des données d'économie, météorologie ... Et à partir de votre thématique vous devez réaliser un notebook faisant les choses suivantes : 
+L'idée est alors que vous réalisiez les actions suivantes : 
 
-1. Présentation du sujet 
-2. Récupération judicieuse des données sur le web via des requêtes HTTP (judicieuse = on ne récupère que ce dont on vraiment besoin)
-3. Traitement de données, libre à vous, il faut faire dire des choses aux chiffres !
-4. Synthèse des résultats, beaux graphiques.
+1. A l'aide d'un programme python : 
+    1. faire une requète `GET` permettant de trouver quel est votre ID d'utilisateur 
+    2. faire une requète `PATCH` pour mettre à jour votre status 
+    3. faire des requètes `GET`/`POST` pour vous envoyer des messages entre vous
+2. A l'aide du combo HTML/CSS/JS 
+    1. Faire le client web de ce serveur 🤗 !
+
+```{code-cell} ipython3
+
+```
