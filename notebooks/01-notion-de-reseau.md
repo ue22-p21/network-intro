@@ -90,6 +90,8 @@ Considérons un exemple très simple, vous sur votre ordinateur portable, facile
 
 *Situation 2 :* Depuis votre ordinateur connecté en wifi à votre box vous voulez accéder à un site web quelconque. Dans ce cas le site web que vous recherchez n'est pas dans votre réseau local, votre box s'en rend compte et elle transmet alors votre requête à une passerelle (une machine ayant des interfaces dans plusieurs réseaux distincts) en lui demandant si la destination que vous souhaitez ne serait pas dans son autre réseau. Si c'est le cas c'est gagné, sinon la passerelle va elle même interroger une autre passerelle, ...
 
+<img src="../media/remote.png" style="width: 80%">
+
 +++ {"slideshow": {"slide_type": "subslide"}}
 
 Ce routage se fait notamment en utilisant la fameuse adresse IP (Internet Protocol) qui permet d'adresser des machines dans différents réseaux. 
