@@ -65,11 +65,32 @@ Dans la suite de ce cours nous ne détaillerons pas toutes les couches du modèl
 
 ### Adressage 
 
-Le principe de l'adressage est d'associer à chaque interface réseau une adresse unique. Cette adresse unique repose sur l'utilisation de l'adresse MAC pour (Media Access Control). Cette adresse MAC est une donnée du hardware, typiquement elle est associée à votre carte wifi par exemple par le constructeur de cette dernière. Sur le papier cette adresse est immutable mais dans les faits il est possible de la surcharger si besoin. C'est cette adresse unique qui va permettre à deux ordinateurs de communiquer entre eux sur un réseau qui ne leur est pas exclusivement dédié.
+Le principe de l'adressage est d'associer à chaque interface de chaque machine sur un réseau une adresse unique pour permettre les communications. Cette addresse peut être temporaire (définie dynamiquement à la connexion) ou bien fixe (définie par l'administrateur réseau). C'est ce qu'on appelle l'adresse IP, pour *Internet Protocol*. L'adresse IP d'une interface réseau s'écrit comme une combinaison de quatre nombres compris entre 0 et 255. 
+
+<img src="../media/adresseip.png" style="width: 60%">
+
++++ {"slideshow": {"slide_type": "fragment"}}
+
+**Remarque :** en 2011 est apparu un léger problème technique à savoir l'épuisement des adresse IP disponibles... Et oui ça devait arriver un jour. Il a donc été mis en place le protocol IP v6 (l'ancien protocole était le v4). Le principe est simple passer d'une adresse définie sur 32 bits à une adresse sur 128 bits (écrites en haxadecimal) par exemple `2001:0db8:0000:85a3:0000:0000:ac1f:8001`
 
 +++ {"slideshow": {"slide_type": "subslide"}}
 
 Pour une analogie, un peu simpliste certes mais toujours efficace, vous pouvez considérer l'envoi de courrier par La Poste. Si, lorsque vous envoyez une lettre, vous n'indiquez que le nom de la personne à qui vous destinez cette lettre il y a une chance quasi nulle que la lettre arrive à destination. Car le nom n'est pas unique il y a des homonymes. Alors qu'une adresse postale complète elle est unique. Et bien l'adressage sur le réseau c'est le même principe.
+
++++ {"slideshow": {"slide_type": "subslide"}}
+
+Au détail prêt que connaitre l'IP du serveur ne vous permet pas encore de communiquer avec l'application qui se trouve sur ce serveur. En effet pour cela il vous faut une fois arriver devant le serveur frapper à la bonne porte. Car en effet à tout cela s'ajoute la notion de port, c'est ce qui permet sur un serveur donné de faire tourner (et écouter sur le réseau) différents programmes la distinction se faisant sur le port d'écoute. En gros suivant la porte d'entrée par où on passe on arrive pas sur la même application côté serveur. 
+
+$$ 2^{16} = 65 536\;\;\text{port sur une machine} $$
+
++++ {"slideshow": {"slide_type": "fragment"}}
+
+Quelques port normalisés : 
+* 22 : SSH 
+* 25 : SMTP 
+* 80 : HTTP 
+* 443 : HTTPS
+* ... 
 
 +++ {"slideshow": {"slide_type": "subslide"}}
 
@@ -100,6 +121,24 @@ Donc si l'on résume, l'interconnexion qui constitue en fait la troisième couch
 1. Le routage qui détermine le chemin entre deux machines dans des réseaux différents, chemin passant par les passerelles : ces fameuses machines ayant des interfaces dans deux réseaux distincts.
 1. Le relayage qui s'occupe, une fois la route déterminée, de faire transiter l'information de la machine A à la machine B 
 1. Le contrôle de flux, une fonctionnalité optionnelle mais néanmoins essentielle qui permet de décongestionner l'ensemble du réseau (au sens large). Un peu le Waze du transit de données.
+
++++ {"slideshow": {"slide_type": "slide"}}
+
+### Et les noms de domaines ? 
+
++++ {"slideshow": {"slide_type": "fragment"}}
+
+Vous conviendrez que retenir que une adresse IP n'est pas ce qu'il y a de plus simple ! C'est là qu'interviennent les noms de domaines. Par exemple le domaine `minesparis.psl.eu` correspond à l'adresse ip `77.158.173.58`. C'est quand même plus simple de retenir `minesparis.psl.eu`. Le truc magique qui permet de faire le lien entre une IP et un nom de domaine est ce qu'on appel le DNS *Domain Name System* qui va fournir à votre ordinateur l'adresse IP qui se cache derrière un nom de domaine. Un moyen d'interroger à la main le DNS est d'utiliser la commande nslookup (disponible dans le paquet dnsutils sous debian/ubuntu) 
+
+```
+$ nslookup www.wikipedia.fr
+
+Non-authoritative answer:
+Name:   www.wikipedia.fr
+Address: 51.254.200.228
+Name:   www.wikipedia.fr
+Address: 2001:41d0:302:2100::9ee
+```
 
 +++ {"slideshow": {"slide_type": "slide"}}
 

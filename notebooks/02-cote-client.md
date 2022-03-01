@@ -60,7 +60,9 @@ slideshow:
   slide_type: fragment
 ---
 import subprocess
-proc = subprocess.Popen("python ../sandbox/server_socket_tcp.py", shell=True)
+import pathlib as pl
+cmd = f"python {str(pl.Path('../sandbox/server_socket_tcp.py'))}"
+proc = subprocess.Popen(cmd, shell=True)
 ```
 
 ```{code-cell} ipython3
@@ -381,7 +383,9 @@ slideshow:
   slide_type: subslide
 ---
 import subprocess
-proc=subprocess.Popen("python ../sandbox/server_contact.py", shell=True)
+import pathlib as pl
+cmd = f"python {str(pl.Path('../sandbox/server_contact.py'))}"
+proc=subprocess.Popen(cmd, shell=True)
 ```
 
 ```{code-cell} ipython3
@@ -556,14 +560,12 @@ http_response_len = len(http_response)
 slideshow:
   slide_type: fragment
 ---
-from IPython.display import HTML
-
 print(response.decode("utf-8", "replace"))
 ```
 
 +++ {"slideshow": {"slide_type": "subslide"}}
 
-Nous avons donc pu récupérer la page Web de l’accueil google et l'afficher. Mais nous ne pouvons pas aller beaucoup plus loin. En effet pour interagir avec des ressources web via le protocole HTTP il est nécessaire de construire des requêtes HTTP, c'est-à-dire ces fameux messages que l'on envoie comprenant de nombreuses informations additionnelles. De plus vous remarquez sans doute qu'il y a quelques problèmes de rendu dans la page que l'on a affichée. C'est parce que nous avons reçu une page web mais que nous n'avons pas fait la demande pour les feuilles de style (les fichiers css) associés.
+Nous avons donc pu obtenir une réponse de google et l'afficher (on voit au passage qu'il nous as répondu avec du html). Mais nous ne pouvons pas aller beaucoup plus loin. En effet pour interagir avec des ressources web via le protocole HTTP il est nécessaire de construire des requêtes HTTP, c'est-à-dire ces fameux messages que l'on envoie comprenant de nombreuses informations additionnelles. De plus vous remarquez sans doute qu'il y a quelques problèmes de rendu dans la page que l'on a affichée. C'est parce que nous avons reçu une page web mais que nous n'avons pas fait la demande pour les feuilles de style (les fichiers css) associés.
 
 +++ {"slideshow": {"slide_type": "subslide"}}
 
@@ -582,7 +584,7 @@ import http
 slideshow:
   slide_type: fragment
 ---
-connection = http.client.HTTPConnection("www.bmarchand.fr")
+connection = http.client.HTTPConnection("cpp.bmarchand.fr")
 connection.request("GET", "/")
 response = connection.getresponse()
 print("Status: {} and reason: {}".format(response.status, response.reason))
@@ -591,21 +593,11 @@ print("Status: {} and reason: {}".format(response.status, response.reason))
 ```{code-cell} ipython3
 ---
 slideshow:
-  slide_type: fragment
----
-from IPython.display import HTML
-
-data = response.read()
-
-#HTML(response.read())
-```
-
-```{code-cell} ipython3
----
-slideshow:
   slide_type: subslide
 ---
-HTML(data.decode("utf-8", "replace"))
+
+data = response.read()
+print(data.decode("utf-8", "replace"))
 ```
 
 +++ {"slideshow": {"slide_type": "subslide"}}
@@ -619,7 +611,7 @@ slideshow:
 ---
 import requests
 
-out = requests.get("http://bmarchand.fr")
+out = requests.get("http://cpp.bmarchand.fr")
 ```
 
 ```{code-cell} ipython3
@@ -746,7 +738,9 @@ slideshow:
   slide_type: fragment
 ---
 import subprocess
-proc=subprocess.Popen("python ../sandbox/server_http_random.py", shell=True)
+import pathlib as plt 
+cmd = f"python {str(pl.Path('../sandbox/server_http_random.py'))}"
+proc=subprocess.Popen(cmd, shell=True)
 ```
 
 ```{code-cell} ipython3
