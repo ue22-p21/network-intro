@@ -10,6 +10,13 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+nbTranslate:
+  displayLangs: ['*']
+  hotkey: alt-t
+  langInMainMenu: true
+  sourceLang: en
+  targetLang: fr
+  useGoogleTranslate: true
 rise:
   autolaunch: true
 ---
@@ -69,9 +76,9 @@ Le principe de l'adressage est d'associer à chaque interface de chaque machine 
 
 <img src="../media/adresseip.png" style="width: 60%">
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "subslide"}}
 
-**Remarque :** en 2011 est apparu un léger problème technique à savoir l'épuisement des adresse IP disponibles... Et oui ça devait arriver un jour. Il a donc été mis en place le protocol IP v6 (l'ancien protocole était le v4). Le principe est simple passer d'une adresse définie sur 32 bits à une adresse sur 128 bits (écrites en haxadecimal) par exemple `2001:0db8:0000:85a3:0000:0000:ac1f:8001`
+**Remarque :** en 2011 est apparu un léger problème technique à savoir **l'épuisement des adresse IP** disponibles... Et oui ça devait arriver un jour. Il a donc été mis en place le protocol IP v6 (l'ancien protocole était le v4). Le principe est simple passer d'une adresse définie sur 32 bits à une adresse sur 128 bits (écrites en haxadecimal) par exemple `2001:0db8:0000:85a3:0000:0000:ac1f:8001`
 
 +++ {"slideshow": {"slide_type": "subslide"}}
 
@@ -90,7 +97,7 @@ Quelques port normalisés :
 * 25 : SMTP 
 * 80 : HTTP 
 * 443 : HTTPS
-* ... 
+* ...
 
 +++ {"slideshow": {"slide_type": "subslide"}}
 
@@ -108,7 +115,6 @@ Considérons un exemple très simple, vous sur votre ordinateur portable, facile
 
 +++ {"slideshow": {"slide_type": "subslide"}}
 
-
 *Situation 2 :* Depuis votre ordinateur connecté en wifi à votre box vous voulez accéder à un site web quelconque. Dans ce cas le site web que vous recherchez n'est pas dans votre réseau local, votre box s'en rend compte et elle transmet alors votre requête à une passerelle (une machine ayant des interfaces dans plusieurs réseaux distincts) en lui demandant si la destination que vous souhaitez ne serait pas dans son autre réseau. Si c'est le cas c'est gagné, sinon la passerelle va elle même interroger une autre passerelle, ...
 
 <img src="../media/remote.png" style="width: 80%">
@@ -122,9 +128,9 @@ Donc si l'on résume, l'interconnexion qui constitue en fait la troisième couch
 1. Le relayage qui s'occupe, une fois la route déterminée, de faire transiter l'information de la machine A à la machine B 
 1. Le contrôle de flux, une fonctionnalité optionnelle mais néanmoins essentielle qui permet de décongestionner l'ensemble du réseau (au sens large). Un peu le Waze du transit de données.
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "subslide"}}
 
-### Et les noms de domaines ? 
+### Et les noms de domaines ?
 
 +++ {"slideshow": {"slide_type": "fragment"}}
 

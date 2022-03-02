@@ -10,6 +10,13 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+nbTranslate:
+  displayLangs: ['*']
+  hotkey: alt-t
+  langInMainMenu: true
+  sourceLang: en
+  targetLang: fr
+  useGoogleTranslate: true
 rise:
   autolaunch: true
 ---
@@ -595,7 +602,6 @@ print("Status: {} and reason: {}".format(response.status, response.reason))
 slideshow:
   slide_type: subslide
 ---
-
 data = response.read()
 print(data.decode("utf-8", "replace"))
 ```

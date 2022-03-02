@@ -10,6 +10,13 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+nbTranslate:
+  displayLangs: ['*']
+  hotkey: alt-t
+  langInMainMenu: true
+  sourceLang: en
+  targetLang: fr
+  useGoogleTranslate: true
 rise:
   autolaunch: true
 ---
@@ -25,11 +32,13 @@ rise:
 
 # Introduction
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "subslide"}}
 
 ## La coopération le concept clé de l'informatique 
 
-TODO 
+AUjourd'hui la plupart des systèmes informatiques/services web que vous pouvez utiliser quotidiennement ne sont pas **une** application mais un **ensemble** d'application qui intéragissent entre elles. 
+
+<img src="../media/architecture.png" style="width: 60%;">
 
 +++ {"slideshow": {"slide_type": "subslide"}}
 
@@ -37,19 +46,19 @@ TODO
 
 +++ {"slideshow": {"slide_type": "subslide"}}
 
-Le modèle coopérant le plus courant dans le monde de l'informatique met en jeu le concept de réseau. En effet dans le monde actuel tout est interconnecté via des réseaux. Et grâce à ce réseau il est possible de connecter tout un tas d'applications entre elles.
+Le modèle coopérant le plus courant dans le monde de l'informatique met en jeu le concept de **réseau**. En effet dans le monde actuel tout est interconnecté via des réseaux. Et grâce à ce réseau il est possible de connecter tout un tas d'applications entre elles.
 
 +++ {"slideshow": {"slide_type": "fragment"}}
 
-Cela introduit alors tout un tas de questions : comment communiquer entre deux applications sur un réseau ? Comment envoyer un message d'une application vers une autre via le réseau ? Sous quel format envoyer ce message ? Comment fait-on une application Python capable d'écouter sur le réseau ?
+Cela introduit alors tout un tas de questions : 
+- comment communiquer entre deux applications sur un réseau ? 
+- Comment envoyer un message d'une application vers une autre via le réseau ? 
+- Sous quel format envoyer ce message ? 
+- Comment fait-on une application Python capable d'écouter sur le réseau ?
 
 +++ {"slideshow": {"slide_type": "fragment"}}
 
 Nous allons essayer de répondre à toutes ces questions dans le cadre de ce cours.
-
-+++ {"slideshow": {"slide_type": "subslide"}}
-
-Il faut bien voir qu'il existe plusieurs approches possibles pour faire des programmes coopérants via un réseau. Il ne suffit pas de dire que l'on fait du réseau pour que tout soit clair, loin de là !! Car vous vous en doutez peut-être mais il y a un tas de manière différentes de faire communiquer deux programmes via un réseau.
 
 +++ {"slideshow": {"slide_type": "subslide"}}
 
@@ -84,6 +93,8 @@ Dans la suite de ce cours nous ne nous focaliserons que sur l'architecture clien
 +++ {"slideshow": {"slide_type": "subslide"}}
 
 La dessus vous vous dites certainement, ok mais le réseau c'est le web non ? Et bien non le réseau ce n'est pas le web, ni internet. Des réseaux il y en a partout. Alors oui c'est vrai internet c'est le réseau que l'on voit le plus mais ce n'est pas le seul. De plus internet est plus un réseau de réseaux. 
+
+<img src="../media/web.jpg" style="width: 40%;">
 
 Donc ce cours ne nous permettra pas de programmer du réseau sur internet ? J'ai pas dis ça donc restez encore un peu. Je dis juste que le Web n'a rien de mystique il est bâti sur des concepts qui existaient avant. Et donc rassurez-vous tout ce que nous allons voir dans la suite de ce cours s'appliquera aussi bien à du Web qu'à un réseau local coupé d'internet. 
 
