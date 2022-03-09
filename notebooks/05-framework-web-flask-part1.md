@@ -1,5 +1,5 @@
 ---
-celltoolbar: Slideshow
+celltoolbar: Diaporama
 jupytext:
   cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
   notebook_metadata_filter: all,-language_info,-toc,-jupytext.text_representation.jupytext_version,-jupytext.text_representation.format_version
@@ -7,9 +7,16 @@ jupytext:
     extension: .md
     format_name: myst
 kernelspec:
-  display_name: Python 3
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
+nbTranslate:
+  displayLangs: ['*']
+  hotkey: alt-t
+  langInMainMenu: true
+  sourceLang: en
+  targetLang: fr
+  useGoogleTranslate: true
 rise:
   autolaunch: true
 ---
@@ -54,9 +61,13 @@ Plus sérieusement, nous allons voir dans la suite que le fait d'utiliser un fra
 
 Alors comme énoncé dans le titre du notebook nous allons dans la suite de ce cours utiliser le framework Python flask pour faire du développement Web. Flask est un framework web Python développé depuis 2010, donc relativement récent, qui se veut minimaliste et léger.
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "subslide"}}
 
 Alors pour répondre tout de suite à votre question qui est, Flask est-il le seul, non bien évidemment il existe d'autre framework Python pour le développement web. Le plus connu est certainement Django [https://www.djangoproject.com/](https://www.djangoproject.com/) qui est notamment caché derrière quelques "petits" sites que vous connaissez peut-être comme Instagram, Pinterest, ... Ah et pour l'anecdote aussi le site nbhosting que vous avez massivement utilisé pour faire du Python c'est du django caché derrière.
+
++++ {"slideshow": {"slide_type": "fragment"}}
+
+<img src="../media/framework.png" style="width: 60%;">
 
 +++ {"slideshow": {"slide_type": "fragment"}}
 
@@ -236,7 +247,10 @@ Dans le dossier `flask_demo/demo3/` se trouve un exemple de fichier html templat
 slideshow:
   slide_type: fragment
 ---
-!ls flask_demo/demo3/
+import pathlib as pl
+fdemo = pl.Path("..") / "flask_demo" / "demo3"
+for f in fdemo.glob("*"):
+    print(f)
 ```
 
 ```{code-cell} ipython3
@@ -244,7 +258,8 @@ slideshow:
 slideshow:
   slide_type: fragment
 ---
-!cat flask_demo/demo3/templates/wheel.html
+with open( fdemo/"templates"/"wheel.html" ) as f:
+    print(f.read())
 ```
 
 +++ {"slideshow": {"slide_type": "fragment"}}
@@ -294,7 +309,8 @@ Une fois notre page HTML templatée par ce que l'on veut, il faut expliquer à n
 slideshow:
   slide_type: fragment
 ---
-!cat flask_demo/demo3/app.py
+with open( fdemo/"app.py" ) as f:
+    print(f.read())
 ```
 
 +++ {"slideshow": {"slide_type": "fragment"}}
@@ -464,13 +480,6 @@ Plusieurs remarques à faire à ce niveau: (i) vous voyez apparaître dans le d�
 +++ {"slideshow": {"slide_type": "subslide"}}
 
 Dans le dossier `flask_demo/demo5` vous trouverez les sources de l'application flask avec le formulaire de login. Je vous invite donc à le tester en vrai et le traffiquer selon vos envie, en ajoutant des champs par exemple ! Il y a également dans cet exemple un traitemant un peu plus avancé de la réponse du serveur.
-
-+++ {"slideshow": {"slide_type": "subslide"}}
-
-### Une application : résolution d'EDO
-
-
-Bon alors juste pour le fun, je sais ca n'a pas l'air si fun que ça mais attendez un peu. Je vous propose de prendre 5 minutes pour faire une application Flask destinée à résoudre une équation différentielle ordinaire du premier ordre, vous l'avez déjà tous fait en Python donc vous avez le code sous la main. Il faut juste que vous fassiez un formulaire pour saisir les paramètres de l'EDO et à la soumission du formulaire votre serveur Flask calcul la solution de l'EDO et la renvoie à une page web qui trace une jolie courbe (quelque lignes de javascript suffisent pour tracer une courbe, il y a plein de librairie javascript disponible).
 
 +++ {"slideshow": {"slide_type": "slide"}}
 

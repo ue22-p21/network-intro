@@ -1,5 +1,5 @@
 ---
-celltoolbar: Slideshow
+celltoolbar: Diaporama
 jupytext:
   cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
   notebook_metadata_filter: all,-language_info,-toc,-jupytext.text_representation.jupytext_version,-jupytext.text_representation.format_version
@@ -7,9 +7,16 @@ jupytext:
     extension: .md
     format_name: myst
 kernelspec:
-  display_name: Python 3
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
+nbTranslate:
+  displayLangs: ['*']
+  hotkey: alt-t
+  langInMainMenu: true
+  sourceLang: en
+  targetLang: fr
+  useGoogleTranslate: true
 rise:
   autolaunch: true
 ---
@@ -22,17 +29,23 @@ rise:
 
 ## Un peu plus de souplesse
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "slide"}, "cell_style": "center"}
 
 Dans tout ce que nous venons de voir il y a un point qui vous a peut-être interpelé c'est la rigidité des communications via réseau. En effet dans tous les cas il y a un protocole bien établi à suivre qui est : 
 
-1. Le client se connecte au serveur
-2. Le client envoie un message au serveur
-3. Le serveur réceptionne le message et répond au client
-4. Le client reçoit la réponse du serveur. 
-5. La connexion se ferme 
+<ul> 
+    <li>Le client se connecte au serveur</li>
+    <li>Le client envoie un message au serveur</li>
+    <li>Le serveur réceptionne le message et répond au client</li>
+    <li>Le client reçoit la réponse du serveur</li>
+    <li>La connexion se ferme</li>     
+</ul>
+
+<img src="../media/http.png" style="width: 30%;">        
+
 
 Plus particulièrement ce qui pourrait vous choquer c'est qu'afin que le serveur puisse envoyer un message au client il est impératif que ce dernier ait d'abord envoyé un message au serveur. On est toujours dans un modèle où le client amorce la discussion et le serveur ne fait que répondre.
+
 
 +++ {"slideshow": {"slide_type": "slide"}}
 
@@ -41,6 +54,8 @@ Fondamentalement ce n'est pas pénalisant vous allez me dire. Oui mais un peu qu
 +++ {"slideshow": {"slide_type": "slide"}}
 
 C'est dans ce contexte qu'est apparu le protocole websocket. Le principe est très simple, il s'agit d'établir une connexion bidirectionnelle entre un client et le serveur, on parle de connexion *full-duplex*. Cela permet alors au serveur de pousser des informations vers le client sans que ce dernier n'est rien demandé. Il faut bien voir que le protocole websocket est relativement récent par rapport au HTTP. En effet la première normalisation de websocket date de 2011 tandis que le HTTP remonte lui à 1990 (la meilleure année !!)
+
+<img src="../media/ws.png" style="width: 40%;">
 
 +++ {"slideshow": {"slide_type": "slide"}}
 
@@ -81,7 +96,10 @@ slideshow:
   slide_type: fragment
 ---
 import subprocess
-proc = subprocess.Popen("python ../sandbox/ws_echo_server.py", shell=True)
+import pathlib as pl 
+cmd = "python"
+path = pl.Path("..") / "sandbox" / "ws_echo_server.py"
+proc = subprocess.Popen(f"{cmd} {str(path)}", shell=True)
 ```
 
 +++ {"slideshow": {"slide_type": "subslide"}}
@@ -166,7 +184,9 @@ slideshow:
   slide_type: fragment
 ---
 import subprocess
-proc = subprocess.Popen("python ../sandbox/ws_echo_server.py", shell=True)
+cmd = "python"
+path = pl.Path("..") / "sandbox" / "ws_echo_server.py"
+proc = subprocess.Popen(f"{cmd} {path}", shell=True)
 ```
 
 +++ {"slideshow": {"slide_type": "fragment"}}
@@ -446,7 +466,3 @@ server.stop()
 +++ {"slideshow": {"slide_type": "fragment"}}
 
 Ainsi en quelques lignes nous avons pu d'évelopper un système de messagerie instantanée acceptant autant de client que nécessaire.
-
-+++ {"slideshow": {"slide_type": "fragment"}}
-
-Pour ceux qui douteraient encore de l'apport significatif des websocket pour ce genre d'application je vous invite a essayer de refaire l'application de messagerie mais sans websocket, uniquement avec du HTTP. Et une fois que ça marche on en rediscute ;)

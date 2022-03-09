@@ -1,5 +1,5 @@
 ---
-celltoolbar: Slideshow
+celltoolbar: Diaporama
 jupytext:
   cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
   notebook_metadata_filter: all,-language_info,-toc,-jupytext.text_representation.jupytext_version,-jupytext.text_representation.format_version
@@ -7,9 +7,16 @@ jupytext:
     extension: .md
     format_name: myst
 kernelspec:
-  display_name: Python 3
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
+nbTranslate:
+  displayLangs: ['*']
+  hotkey: alt-t
+  langInMainMenu: true
+  sourceLang: en
+  targetLang: fr
+  useGoogleTranslate: true
 rise:
   autolaunch: true
 ---
@@ -17,6 +24,8 @@ rise:
 +++ {"slideshow": {"slide_type": "slide"}}
 
 # Côté serveur
+
+**Basile Marchand --- Centre des Matériaux - Mines Paris - Université PSL**
 
 +++ {"slideshow": {"slide_type": "slide"}}
 
@@ -26,13 +35,25 @@ rise:
 
 Dans la partie précédente du cours nous avons donc vu comment mettre en place un client TCP ou HTTP à l'aide de Python. Et nous avons surtout vu comment cela peut nous permettre d'aller recherher de l'information sur le web. Mais il ne s'agit là que du côté lumineux de la force. En effet nous l'avons évoqué au tout début du cours les architectures que l'on étudie sont des architectures client-**serveur**. Nous allons donc maintenant passer du côté obscur et voir l'aspect serveur.
 
-+++ {"slideshow": {"slide_type": "slide"}}
-
-Tout d'abord un serveur c'est quoi ? Dans le contexte qui nous intéresse le serveur est juste un programme tournant en tâche de fond sur une machine connectée à un réseau. Ce serveur passe le plupart de son temps à ne rien faire si ce n'est être en attente que quelqu'un (un client en l'occurence) ne vienne lui parler. Ce n'est que lorsqu'un client commence à lui parler que le serveur se réveille et fait des choses.
+<img src="../media/ClientServer.png" style="width: 30%;">
 
 +++ {"slideshow": {"slide_type": "slide"}}
 
-Une particularité du serveur et nous verrons dans la suite comment cela est réaliser concrètement, c'est que dans une architecture client-serveur, le client ne se connecte qu'à un seul serveur tandis que le serveur peut-être contacté par des milliers de client simultanément. Prenons par exemple Google, il y a en moyenne 80 000 connexions par seconde au moteur de recherche Google, en d'autre mots 80 000 clients se connectent chaque seconde au serveur google. Ce n'est pas tout à fait vrai car pour pouvoir encaisser une telle charge il n'y a pas qu'un serveur google pour le monde entier. Mais vous voyez l'idée.
+Tout d'abord un serveur c'est quoi ? 
+
+Dans le contexte qui nous intéresse le **serveur** est juste un ***programme*** tournant en tâche de fond sur une machine connectée à un réseau. Ce serveur passe le plupart de son temps à ne rien faire si ce n'est être **en attente** que quelqu'un (un client en l'occurence) ne vienne lui parler. 
+
+Ce n'est que lorsqu'un client commence à lui parler que le serveur se réveille et fait des choses.
+
++++ {"slideshow": {"slide_type": "slide"}}
+
+Une particularité du serveur et nous verrons dans la suite comment cela est réaliser concrètement, c'est que dans une architecture client-serveur : 
+- le client ne se connecte qu'à un seul serveur 
+- le serveur peut-être contacté par des milliers de client simultanément. 
+
+Prenons par exemple Google, il y a en moyenne 80 000 connexions par seconde au moteur de recherche Google, en d'autre mots 80 000 clients se connectent chaque seconde au serveur google. 
+
+Ce n'est pas tout à fait vrai car pour pouvoir encaisser une telle charge il n'y a pas qu'un serveur google pour le monde entier. Mais vous voyez l'idée.
 
 +++ {"slideshow": {"slide_type": "slide"}}
 
@@ -117,7 +138,18 @@ conn.close()
 
 +++ {"slideshow": {"slide_type": "subslide"}}
 
-Plusieur remarques. Tout d'abord vous voyez apparaitre le module `threading` et la création d'un `Thread`. Ne vous affolez pas ce n'est pas nécessaire en temps normal. C'est juste nécessaire ici afin de lancer simultanément le serveur et le client dans le même notebook. Du côté serveur on voit donc que la méthode `accept`, qui on le précise au passage est bloquante, retourne un objet de type socket et l'adresse ip du client, qui rien de surprenant, est la même que le serveur. L'objet `socket` ainsi créé côté serveur permet : (i) de recevoir le message émis par le client ; (ii) de le traiter (dans notre cas on ne fait que l'afficher côté serveur) ; (iii) d'envoyer un réponse au serveur. À la fin de l'échange on ferme alors le socket lié à la communication client-serveur.
+Plusieur remarques. 
+
+Tout d'abord vous voyez apparaitre le module `threading` et la création d'un `Thread`. Ne vous affolez pas ce n'est pas nécessaire en temps normal. C'est juste nécessaire ici afin de lancer simultanément le serveur et le client dans le même notebook. 
+
++++ {"slideshow": {"slide_type": "fragment"}}
+
+Du côté serveur on voit donc que la méthode `accept`, qui on le précise au passage est bloquante, retourne un objet de type socket et l'adresse ip du client, qui rien de surprenant, est la même que le serveur. L'objet `socket` ainsi créé côté serveur permet : 
+- de recevoir le message émis par le client,
+- de le traiter (dans notre cas on ne fait que l'afficher côté serveur),
+- d'envoyer un réponse au serveur. 
+
+À la fin de l'échange on ferme alors le socket lié à la communication client-serveur.
 
 +++ {"slideshow": {"slide_type": "subslide"}}
 
